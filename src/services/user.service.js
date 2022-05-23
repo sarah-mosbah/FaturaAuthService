@@ -40,3 +40,11 @@ export  async function updateUserIsVerified(user, roleId) {
         throw error;
     }
 }
+
+export function updateUserRoles(userId, roles) {
+    try {
+        return userRepository.updateUserRoles(userId, roles);
+    } catch (error) {
+        throw error;
+    }
+}

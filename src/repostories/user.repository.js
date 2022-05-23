@@ -17,8 +17,7 @@ export function getUser(email) {
 }
 export function getUserById(userId) {
     try {
-        const objectId = mongoose.Types.ObjectId(userId);
-         return UserEntity.findById(objectId);
+        return UserEntity.findById(userId);
     } catch (error) {
         throw error;
     }
@@ -26,9 +25,19 @@ export function getUserById(userId) {
 
 export function updateUser(user) {
     try {
-         return UserEntity.findByIdAndRemove({_id: user._id}, {
+         return UserEntity.findByIdAndUpdate({_id: user._id}, {
              $set: user
          });
+    } catch (error) {
+        throw error;
+    }
+}
+
+export function updateUserRoles(userId, roles) {
+    try {
+        return UserEntity.findByIdAndUpdate({_id: userId}, {
+             $set: {roles}
+        }, {new: true});
     } catch (error) {
         throw error;
     }

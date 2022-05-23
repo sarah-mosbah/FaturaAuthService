@@ -80,3 +80,16 @@ export async function logOut(req, res)  {
         return res.status(500).json({message: error.message});
     }
 }
+
+
+export async function setUserRoles(req, res)  {
+    try {
+       const userId = req.params.userId;
+       const roles = req.body.roles;
+       const updatedUser = await userService.updateUserRoles(userId, roles);
+       return res.status(200).json(updatedUser);
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+

@@ -57,3 +57,20 @@ export function verifyValidator(req,res,next){
         return res.status(400).json({ message:'Bad Request', error: e.message});
     }
 }
+
+export function setUserRolesValidator(req,res,next){
+    const body = req.body;
+    const schema = Joi.object().keys({
+        roles: Joi.array(),
+    });
+    try {
+        const result =  schema.validate(body);
+        if (result.error) {
+            throw new Error(result.error.message);
+        }
+        next();
+    }
+    catch(e) {
+        return res.status(400).json({ message:'Bad Request', error: e.message});
+    }
+}
