@@ -1,23 +1,36 @@
+import mongoose from "mongoose";
 import { UserEntity } from "../models/user.model.js";
-export async function createUser(user) {
+export function createUser(user) {
     try {
-         return await UserEntity.create(user);
+         return UserEntity.create(user);
     } catch (error) {
         throw error;
     }
 }
 
-export async function getUser(email) {
+export function getUser(email) {
     try {
-         return await UserEntity.findOne({email}).lean();
+         return  UserEntity.findOne({email}).lean();
     } catch (error) {
         throw error;
     }
 }
-export async function getUserById(userId) {
+export function getUserById(userId) {
     try {
-         return await UserEntity.findById(userId).lean();
+        const objectId = mongoose.Types.ObjectId(userId);
+         return UserEntity.findById(objectId);
     } catch (error) {
         throw error;
     }
 }
+
+export function updateUser(user) {
+    try {
+         return UserEntity.findByIdAndRemove({_id: user._id}, {
+             $set: user
+         });
+    } catch (error) {
+        throw error;
+    }
+}
+

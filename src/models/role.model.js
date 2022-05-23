@@ -10,7 +10,7 @@ const RoleSchema = new Schema({
     unique: true
   },
   permissions: {
-    type: [{}],
+    type: {},
     required: [
         true, 'permissions are required.'
     ],

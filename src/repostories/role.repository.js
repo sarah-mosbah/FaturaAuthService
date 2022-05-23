@@ -25,7 +25,15 @@ export function getAllRolesName() {
 
 export function findAndUpdate(roleName, role) {
     try {
-        return RoleEntity.findOneAndUpdate(roleName, {$set: role});
+        return RoleEntity.findOneAndUpdate({roleName}, {$set: role});
+    } catch (error) {
+        throw error;
+    }
+}
+
+export function findRoleByName(roleName) {
+    try {
+        return RoleEntity.findOne({roleName});
     } catch (error) {
         throw error;
     }

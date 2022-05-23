@@ -5,8 +5,7 @@ export function signUpValidator(req,res,next) {
     const schema = Joi.object().keys({
         username: Joi.string().required(),
         password: Joi.string().required(),
-        email: Joi.string().email().required(),
-        roles: Joi.array().required()
+        email: Joi.string().email().required()
     });
     try {
         const result =  schema.validate(body);

@@ -1,22 +1,22 @@
 [
     {
         "roleName": "general",
-        "permissions": [{
+        "permissions": {
             "shop": "readwrite"
-        }]
+        }
     },
     {
         "roleName": "verification",
-        "permissions": [{
+        "permissions": {
             "verify": "readwrite"
-        }]
+        }
     },
     {
         "roleName": "admin",
-        "permissions": [{
+        "permissions":{
             "shop": "readwrite",
             "userRoles": "readwrite"
-        }]
+        }
     }
 
 

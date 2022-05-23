@@ -3,11 +3,8 @@ import { hashPassword, validatePassword } from '../utils/password.utils.js';
 
 export  async function createUser(user) {
     try {
-    user.password = await hashPassword(user.password);
-    const {_id, email, password, username } = await userRepository.createUser(user);
-    return {
-       _id, email, password, username
-    };
+        user.password = await hashPassword(user.password);
+        return await userRepository.createUser(user);
     } catch (error) {
         throw error;
     }
@@ -29,6 +26,16 @@ export  async function getUser(signedInUser) {
 export  async function getUserById(userId) {
     try {
       return await userRepository.getUserById(userId);
+    } catch (error) {
+        throw error;
+    }
+}
+
+export  async function updateUserIsVerified(user, roleId) {
+    try {
+        user.roles = [roleId];
+        user.isVerified = true;
+        return userRepository.updateUser(user);
     } catch (error) {
         throw error;
     }
