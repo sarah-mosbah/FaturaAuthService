@@ -9,6 +9,7 @@ const PORT =  process.env.PORT;
 (async function () {
     await connect();
     await index(app);
+  
     app.get('/', (req, res) => res.status(200).json({message: 'Server is Up and Running'}))
     app.listen(PORT, () => {
       console.log(`app listening on port ${PORT}`)

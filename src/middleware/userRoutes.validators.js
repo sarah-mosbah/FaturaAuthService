@@ -6,6 +6,7 @@ export function signUpValidator(req,res,next) {
         username: Joi.string().required(),
         password: Joi.string().required(),
         email: Joi.string().email().required(),
+        roles: Joi.array().required()
     });
     try {
         const result =  schema.validate(body);
@@ -27,6 +28,24 @@ export function loginValidator(req,res,next){
     const schema = Joi.object().keys({
         password: Joi.string().required(),
         email: Joi.string().email().required(),
+    });
+    try {
+        const result =  schema.validate(body);
+        if (result.error) {
+            throw new Error(result.error.message);
+        }
+        next();
+    }
+    catch(e) {
+        return res.status(400).json({ message:'Bad Request', error: e.message});
+    }
+}
+
+
+export function verifyValidator(req,res,next){
+    const body = req.body;
+    const schema = Joi.object().keys({
+        verificationCode: Joi.number(),
     });
     try {
         const result =  schema.validate(body);

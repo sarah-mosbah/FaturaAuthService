@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const RolePermissionsSchema = new Schema({
+const RoleSchema = new Schema({
   roleName: {
     type: String,
     required: [
@@ -10,10 +10,10 @@ const RolePermissionsSchema = new Schema({
     unique: true
   },
   permissions: {
-    type: [String],
+    type: [{}],
     required: [
         true, 'permissions are required.'
     ],
   },
 });
-export const RolePermissionsEntity = mongoose.model('Role', RolePermissionsSchema);
+export const RoleEntity = mongoose.model('Role', RoleSchema);

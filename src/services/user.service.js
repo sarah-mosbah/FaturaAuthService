@@ -4,7 +4,7 @@ import { hashPassword, validatePassword } from '../utils/password.utils.js';
 export  async function createUser(user) {
     try {
     user.password = await hashPassword(user.password);
-    const {_id, email, password, username} = await userRepository.createUser(user);
+    const {_id, email, password, username } = await userRepository.createUser(user);
     return {
        _id, email, password, username
     };

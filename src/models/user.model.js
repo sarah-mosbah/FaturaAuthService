@@ -26,6 +26,12 @@ const UserSchema = new Schema({
   isVerified: {
     type: Boolean,
     default: false
-  }
+  },
+  verificationCode:  {
+    type: Number,
+    required: [
+      true, 'Verification Code is required.'
+  ],
+  },
 });
 export const UserEntity = mongoose.model('User', UserSchema);

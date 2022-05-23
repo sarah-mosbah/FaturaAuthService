@@ -1,0 +1,23 @@
+[
+    {
+        "roleName": "general",
+        "permissions": [{
+            "shop": "readwrite"
+        }]
+    },
+    {
+        "roleName": "verification",
+        "permissions": [{
+            "verify": "readwrite"
+        }]
+    },
+    {
+        "roleName": "admin",
+        "permissions": [{
+            "shop": "readwrite",
+            "userRoles": "readwrite"
+        }]
+    }
+
+
+]
