@@ -11,6 +11,10 @@ export const authorization = (allowedPermission) => {
       const token = req.cookies.token;
       jwt.verify(token, jwtPublicKey, { algorithm:  ["RS256"]});
       const payload = getPayload(token);
+      if(new Date(payload.expiresIn) > new Date()) {
+        res.clearCookie('token');
+        return res.status(401).json({message:"Token Expired"});
+      }
       if(!payload.permissions) {
         return res.status(401).json({message:"unauthorized"});
       }
@@ -22,7 +26,6 @@ export const authorization = (allowedPermission) => {
       }
       next();
     } catch (error) {
-      console.log("SUBBB", error.message)
       return  res.status(401).json({message:"unauthorized"});
     }
   }

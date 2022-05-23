@@ -7,3 +7,11 @@ export  async function getRoleByRoleName(roleName) {
         throw error;
     }
 }
+
+export async function getRoles(rolesIds) {
+    try {
+        return roleRepository.findRoles(rolesIds);
+    } catch (error) {
+        throw error;
+    }
+}

@@ -31,8 +31,16 @@ export async function signIn(req, res) {
         if(!signedInUser) {
             return res.status(404).json({message: "User doesnt exist"});
         }
-        const jwtToken = await signJwt({userId: signedInUser._id});
-        res.setHeader('Authorization', `Bearer ${jwtToken}`); 
+        if(!signedInUser.isVerified) {
+            return res.status(401).json({message: "User is Not Verified"});
+        }
+        const roles = await roleService.getRoles(signedInUser.roles);
+        let permissions = [];
+        roles.forEach((role) => {
+            permissions = [...permissions, role.permissions];
+        })
+        const jwtToken = signJwt({user: signedInUser, permissions});
+        res.cookie('token', jwtToken);
         return res.status(200).json(signedInUser);
     } catch (error) {
         return res.status(500).json({message: error.message});
@@ -59,6 +67,15 @@ export async function verify(req, res)  {
        const token = signJwt({user:updateUser, permissions: generalRole.permissions});
        res.cookie("token", token);
        return res.status(200).json({message: "User verified successfully"});
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+
+export async function logOut(req, res)  {
+    try {
+        res.clearCookie('token');
+       return res.status(200).json({message: "User logged out successfully"});
     } catch (error) {
         return res.status(500).json({message: error.message});
     }

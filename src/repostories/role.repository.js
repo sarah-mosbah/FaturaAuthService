@@ -38,3 +38,12 @@ export function findRoleByName(roleName) {
         throw error;
     }
 }
+
+
+export function findRoles(rolesIds) {
+    try {
+        return RoleEntity.find({_id: {$in: rolesIds}});
+    } catch (error) {
+        throw error;
+    }
+}

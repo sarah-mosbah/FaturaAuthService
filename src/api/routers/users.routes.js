@@ -7,5 +7,6 @@ export const router = express.Router();
 router.post('/signup', signUpValidator, userHandlers.createUser);
 router.post('/verify', [authorization({verify: "readwrite"}),verifyValidator], userHandlers.verify);
 router.post('/signIn', loginValidator, userHandlers.signIn);
+router.get('/logout', authorization({shop: "readwrite"}), userHandlers.logOut);
 
 
